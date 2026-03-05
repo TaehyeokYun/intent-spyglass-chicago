@@ -14,16 +14,416 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      campaigns_mvp_chicago: {
+        Row: {
+          campaign_day_of_week: string | null
+          campaign_id: number | null
+          campaign_summary: string | null
+          dollar_off_value: string | null
+          id: string
+          max_redemption: number | null
+          offer_end_time: string | null
+          offer_menu_id: number | null
+          offer_name: string | null
+          offer_start_time: string | null
+          offer_type: string | null
+          percentage_off_value: string | null
+          restaurant_id: number | null
+          status: string | null
+          target_new_customer: boolean | null
+          target_returning_customer: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          campaign_day_of_week?: string | null
+          campaign_id?: number | null
+          campaign_summary?: string | null
+          dollar_off_value?: string | null
+          id?: string
+          max_redemption?: number | null
+          offer_end_time?: string | null
+          offer_menu_id?: number | null
+          offer_name?: string | null
+          offer_start_time?: string | null
+          offer_type?: string | null
+          percentage_off_value?: string | null
+          restaurant_id?: number | null
+          status?: string | null
+          target_new_customer?: boolean | null
+          target_returning_customer?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          campaign_day_of_week?: string | null
+          campaign_id?: number | null
+          campaign_summary?: string | null
+          dollar_off_value?: string | null
+          id?: string
+          max_redemption?: number | null
+          offer_end_time?: string | null
+          offer_menu_id?: number | null
+          offer_name?: string | null
+          offer_start_time?: string | null
+          offer_type?: string | null
+          percentage_off_value?: string | null
+          restaurant_id?: number | null
+          status?: string | null
+          target_new_customer?: boolean | null
+          target_returning_customer?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      deal_intent_events: {
+        Row: {
+          anonymous_install_id: string | null
+          app_platform: string | null
+          app_version: string | null
+          campaign_id: number | null
+          city: string | null
+          created_at: string
+          cta_label: string | null
+          distance_miles: number | null
+          event_name: string
+          intent_event_id: string
+          listing_position: number | null
+          location_permission_status: string | null
+          metadata: Json | null
+          neighborhood: string | null
+          offer_menu_id: number | null
+          priority_listing: boolean | null
+          restaurant_id: number | null
+          screen_name: string | null
+          session_id: string | null
+          source: string | null
+        }
+        Insert: {
+          anonymous_install_id?: string | null
+          app_platform?: string | null
+          app_version?: string | null
+          campaign_id?: number | null
+          city?: string | null
+          created_at?: string
+          cta_label?: string | null
+          distance_miles?: number | null
+          event_name: string
+          intent_event_id?: string
+          listing_position?: number | null
+          location_permission_status?: string | null
+          metadata?: Json | null
+          neighborhood?: string | null
+          offer_menu_id?: number | null
+          priority_listing?: boolean | null
+          restaurant_id?: number | null
+          screen_name?: string | null
+          session_id?: string | null
+          source?: string | null
+        }
+        Update: {
+          anonymous_install_id?: string | null
+          app_platform?: string | null
+          app_version?: string | null
+          campaign_id?: number | null
+          city?: string | null
+          created_at?: string
+          cta_label?: string | null
+          distance_miles?: number | null
+          event_name?: string
+          intent_event_id?: string
+          listing_position?: number | null
+          location_permission_status?: string | null
+          metadata?: Json | null
+          neighborhood?: string | null
+          offer_menu_id?: number | null
+          priority_listing?: boolean | null
+          restaurant_id?: number | null
+          screen_name?: string | null
+          session_id?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
+      happyhour_chicago: {
+        Row: {
+          created_at: string
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
+      happyhour_mvp_chicago: {
+        Row: {
+          address: string | null
+          city: string | null
+          description: string | null
+          google_rating: number | null
+          google_url: string | null
+          id: string
+          is_active: boolean | null
+          latitude: number | null
+          longitude: number | null
+          menu_url: string | null
+          name: string | null
+          neighborhood: string | null
+          phone: string | null
+          "postal code": number | null
+          priority_listing: string | null
+          restaurant_id: number | null
+          restaurant_image_url: string | null
+          state: string | null
+          ticket_size_max: string | null
+          ticket_size_min: string | null
+          timezone: string | null
+          updated_at: string | null
+          website_url: string | null
+          yelp_rating: number | null
+          yelp_url: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          description?: string | null
+          google_rating?: number | null
+          google_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          menu_url?: string | null
+          name?: string | null
+          neighborhood?: string | null
+          phone?: string | null
+          "postal code"?: number | null
+          priority_listing?: string | null
+          restaurant_id?: number | null
+          restaurant_image_url?: string | null
+          state?: string | null
+          ticket_size_max?: string | null
+          ticket_size_min?: string | null
+          timezone?: string | null
+          updated_at?: string | null
+          website_url?: string | null
+          yelp_rating?: number | null
+          yelp_url?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          description?: string | null
+          google_rating?: number | null
+          google_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          menu_url?: string | null
+          name?: string | null
+          neighborhood?: string | null
+          phone?: string | null
+          "postal code"?: number | null
+          priority_listing?: string | null
+          restaurant_id?: number | null
+          restaurant_image_url?: string | null
+          state?: string | null
+          ticket_size_max?: string | null
+          ticket_size_min?: string | null
+          timezone?: string | null
+          updated_at?: string | null
+          website_url?: string | null
+          yelp_rating?: number | null
+          yelp_url?: string | null
+        }
+        Relationships: []
+      }
+      happyhour_mvp_mapping: {
+        Row: {
+          category: string | null
+          category_id: number | null
+          id: string
+          is_main_category: boolean | null
+          restaurant_id: number | null
+        }
+        Insert: {
+          category?: string | null
+          category_id?: number | null
+          id?: string
+          is_main_category?: boolean | null
+          restaurant_id?: number | null
+        }
+        Update: {
+          category?: string | null
+          category_id?: number | null
+          id?: string
+          is_main_category?: boolean | null
+          restaurant_id?: number | null
+        }
+        Relationships: []
+      }
+      menu_mvp_chicago: {
+        Row: {
+          category_main: string | null
+          category_sub: string | null
+          id: string
+          item_description: string | null
+          item_name: string | null
+          menu_item_image_url: string | null
+          offer_item_id: number | null
+          offer_menu_id: number | null
+          offer_price: string | null
+          "offer_value_%": string | null
+          offer_value_$: string | null
+          regular_price: string | null
+          restaurant_id: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          category_main?: string | null
+          category_sub?: string | null
+          id?: string
+          item_description?: string | null
+          item_name?: string | null
+          menu_item_image_url?: string | null
+          offer_item_id?: number | null
+          offer_menu_id?: number | null
+          offer_price?: string | null
+          "offer_value_%"?: string | null
+          offer_value_$?: string | null
+          regular_price?: string | null
+          restaurant_id?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          category_main?: string | null
+          category_sub?: string | null
+          id?: string
+          item_description?: string | null
+          item_name?: string | null
+          menu_item_image_url?: string | null
+          offer_item_id?: number | null
+          offer_menu_id?: number | null
+          offer_price?: string | null
+          "offer_value_%"?: string | null
+          offer_value_$?: string | null
+          regular_price?: string | null
+          restaurant_id?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      menus: {
+        Row: {
+          category: string
+          created_at: string | null
+          id: string
+          item_name: string
+          price: number
+          restaurant_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          id?: string
+          item_name: string
+          price: number
+          restaurant_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          id?: string
+          item_name?: string
+          price?: number
+          restaurant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "menus_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants_chicago"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      restaurants_chicago: {
+        Row: {
+          cuisine: string | null
+          happy_hour_deal: string | null
+          happy_hour_end: string | null
+          happy_hour_start: string | null
+          has_happy_hour: boolean | null
+          id: string
+          image_url: string | null
+          name: string
+          neighborhood: string | null
+          price_range: string | null
+        }
+        Insert: {
+          cuisine?: string | null
+          happy_hour_deal?: string | null
+          happy_hour_end?: string | null
+          happy_hour_start?: string | null
+          has_happy_hour?: boolean | null
+          id?: string
+          image_url?: string | null
+          name: string
+          neighborhood?: string | null
+          price_range?: string | null
+        }
+        Update: {
+          cuisine?: string | null
+          happy_hour_deal?: string | null
+          happy_hour_end?: string | null
+          happy_hour_start?: string | null
+          has_happy_hour?: boolean | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          neighborhood?: string | null
+          price_range?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +550,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
