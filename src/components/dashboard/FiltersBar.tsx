@@ -45,8 +45,6 @@ const FiltersBar = ({
   customEndDate,
   setCustomEndDate,
 }: Props) => {
-  const isCustomRange = daysBack === -1;
-
   return (
     <div className="flex flex-wrap items-center gap-3">
       <Select
@@ -72,9 +70,7 @@ const FiltersBar = ({
         </SelectContent>
       </Select>
 
-      {isCustomRange && (
-        <>
-          <Popover>
+      <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
