@@ -411,7 +411,78 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      v_deal_intent_events_chicago: {
+        Row: {
+          anonymous_install_id: string | null
+          app_platform: string | null
+          app_version: string | null
+          campaign_id: number | null
+          chicago_created_at: string | null
+          city: string | null
+          created_at: string | null
+          cta_label: string | null
+          distance_miles: number | null
+          event_name: string | null
+          intent_event_id: string | null
+          listing_position: number | null
+          location_permission_status: string | null
+          metadata: Json | null
+          neighborhood: string | null
+          offer_menu_id: number | null
+          priority_listing: boolean | null
+          restaurant_id: number | null
+          screen_name: string | null
+          session_id: string | null
+          source: string | null
+        }
+        Insert: {
+          anonymous_install_id?: string | null
+          app_platform?: string | null
+          app_version?: string | null
+          campaign_id?: number | null
+          chicago_created_at?: never
+          city?: string | null
+          created_at?: string | null
+          cta_label?: string | null
+          distance_miles?: number | null
+          event_name?: string | null
+          intent_event_id?: string | null
+          listing_position?: number | null
+          location_permission_status?: string | null
+          metadata?: Json | null
+          neighborhood?: string | null
+          offer_menu_id?: number | null
+          priority_listing?: boolean | null
+          restaurant_id?: number | null
+          screen_name?: string | null
+          session_id?: string | null
+          source?: string | null
+        }
+        Update: {
+          anonymous_install_id?: string | null
+          app_platform?: string | null
+          app_version?: string | null
+          campaign_id?: number | null
+          chicago_created_at?: never
+          city?: string | null
+          created_at?: string | null
+          cta_label?: string | null
+          distance_miles?: number | null
+          event_name?: string | null
+          intent_event_id?: string | null
+          listing_position?: number | null
+          location_permission_status?: string | null
+          metadata?: Json | null
+          neighborhood?: string | null
+          offer_menu_id?: number | null
+          priority_listing?: boolean | null
+          restaurant_id?: number | null
+          screen_name?: string | null
+          session_id?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
