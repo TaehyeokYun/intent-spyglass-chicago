@@ -485,6 +485,26 @@ export type Database = {
       }
     }
     Functions: {
+      analytics_daily_visitors: {
+        Args: { from_ts: string; to_ts: string }
+        Returns: {
+          day: string
+          redemptions: number
+          unique_visitors: number
+        }[]
+      }
+      analytics_summary: {
+        Args: { from_ts: string; to_ts: string }
+        Returns: {
+          campaign_views: number
+          card_clicks: number
+          intents: number
+          page_views: number
+          restaurant_views: number
+          total_sessions: number
+          unique_visitors: number
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
