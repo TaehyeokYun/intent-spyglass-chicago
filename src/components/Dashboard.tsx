@@ -167,11 +167,20 @@ const Dashboard = ({ password }: DashboardProps) => {
     return hours;
   }, [filtered]);
 
-  // Unique users (total)
-  const uniqueUsers = useMemo(
-    () => new Set(filtered.map((e) => e.anonymous_install_id).filter(Boolean)).size,
-    [filtered]
-  );
+  // Unique users (total) and returning visitors
+  const { uniqueUsers, returningVisitors } = useMemo(() => {
+    const daysByUser = new Map<string, Set<string>>();
+    filtered.forEach((e) => {
+      if (!e.anonymous_install_id) return;
+      const day = format(toZonedTime(parseISO(e.created_at), TZ), "yyyy-MM-dd");
+      if (!daysByUser.has(e.anonymous_install_id)) daysByUser.set(e.anonymous_install_id, new Set());
+      daysByUser.get(e.anonymous_install_id)!.add(day);
+    });
+    return {
+      uniqueUsers: daysByUser.size,
+      returningVisitors: Array.from(daysByUser.values()).filter((days) => days.size > 1).length,
+    };
+  }, [filtered]);
 
   // Daily unique visitors
   const dailyUniqueVisitors = useMemo(() => {
@@ -252,6 +261,7 @@ const Dashboard = ({ password }: DashboardProps) => {
         <SummaryCards
           totalEvents={filtered.length}
           uniqueUsers={uniqueUsers}
+          returningVisitors={returningVisitors}
           topNeighborhood={
             topRestaurants.length > 0 ? topRestaurants[0].neighborhood : "—"
           }
