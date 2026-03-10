@@ -121,8 +121,6 @@ const FiltersBar = ({
               />
             </PopoverContent>
           </Popover>
-        </>
-      )}
 
       <Select value={neighborhoodFilter} onValueChange={setNeighborhoodFilter}>
         <SelectTrigger className="w-[180px] bg-card">
