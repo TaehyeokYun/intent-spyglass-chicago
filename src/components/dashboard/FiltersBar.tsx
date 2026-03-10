@@ -70,7 +70,9 @@ const FiltersBar = ({
         </SelectContent>
       </Select>
 
-      <Popover>
+      {daysBack === -1 && (
+        <>
+          <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
@@ -83,14 +85,14 @@ const FiltersBar = ({
                 {customStartDate ? format(customStartDate, "MM/dd/yyyy") : "Start date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 pointer-events-auto" align="start">
               <Calendar
                 mode="single"
                 selected={customStartDate}
                 onSelect={setCustomStartDate}
                 disabled={(date) => date > new Date()}
                 initialFocus
-                className={cn("p-3 pointer-events-auto")}
+                className="p-3 pointer-events-auto"
               />
             </PopoverContent>
           </Popover>
@@ -108,7 +110,7 @@ const FiltersBar = ({
                 {customEndDate ? format(customEndDate, "MM/dd/yyyy") : "End date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 pointer-events-auto" align="start">
               <Calendar
                 mode="single"
                 selected={customEndDate}
@@ -117,10 +119,12 @@ const FiltersBar = ({
                   date > new Date() || (customStartDate ? date < customStartDate : false)
                 }
                 initialFocus
-                className={cn("p-3 pointer-events-auto")}
+                className="p-3 pointer-events-auto"
               />
             </PopoverContent>
           </Popover>
+        </>
+      )}
 
       <Select value={neighborhoodFilter} onValueChange={setNeighborhoodFilter}>
         <SelectTrigger className="w-[180px] bg-card">
