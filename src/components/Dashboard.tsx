@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { format, parseISO, startOfDay, subDays } from "date-fns";
+import { format, parseISO, subDays } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import SummaryCards from "@/components/dashboard/SummaryCards";
 import EventChart from "@/components/dashboard/EventChart";
@@ -7,6 +7,7 @@ import HourlyChart from "@/components/dashboard/HourlyChart";
 import IntentMap from "@/components/dashboard/IntentMap";
 import FiltersBar from "@/components/dashboard/FiltersBar";
 import TopRestaurants from "@/components/dashboard/TopRestaurants";
+import DailyUniqueVisitors from "@/components/dashboard/DailyUniqueVisitors";
 import { Loader2 } from "lucide-react";
 
 const TZ = "America/Chicago";
@@ -61,17 +62,37 @@ const Dashboard = ({ password }: DashboardProps) => {
   const [neighborhoodFilter, setNeighborhoodFilter] = useState<string>("all");
   const [eventFilter, setEventFilter] = useState<string>("all");
   const [daysBack, setDaysBack] = useState(30);
+  const [customStartDate, setCustomStartDate] = useState<Date | undefined>();
+  const [customEndDate, setCustomEndDate] = useState<Date | undefined>();
+
+  const effectiveStartDate = useMemo(() => {
+    if (daysBack === -1 && customStartDate) return customStartDate.toISOString();
+    if (daysBack === -1) return subDays(new Date(), 30).toISOString();
+    return subDays(new Date(), daysBack).toISOString();
+  }, [daysBack, customStartDate]);
+
+  const effectiveEndDate = useMemo(() => {
+    if (daysBack === -1 && customEndDate) {
+      const end = new Date(customEndDate);
+      end.setHours(23, 59, 59, 999);
+      return end.toISOString();
+    }
+    return undefined;
+  }, [daysBack, customEndDate]);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const startDate = subDays(new Date(), daysBack).toISOString();
     try {
       const res = await fetch(
         `https://sooalxvjhgrenelyrhov.supabase.co/functions/v1/dashboard-data`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password, startDate }),
+          body: JSON.stringify({
+            password,
+            startDate: effectiveStartDate,
+            endDate: effectiveEndDate,
+          }),
         }
       );
       if (!res.ok) throw new Error("Failed to fetch");
@@ -84,7 +105,7 @@ const Dashboard = ({ password }: DashboardProps) => {
     } finally {
       setLoading(false);
     }
-  }, [password, daysBack]);
+  }, [password, effectiveStartDate, effectiveEndDate]);
 
   useEffect(() => {
     fetchData();
@@ -146,11 +167,25 @@ const Dashboard = ({ password }: DashboardProps) => {
     return hours;
   }, [filtered]);
 
-  // Unique users
+  // Unique users (total)
   const uniqueUsers = useMemo(
     () => new Set(filtered.map((e) => e.anonymous_install_id).filter(Boolean)).size,
     [filtered]
   );
+
+  // Daily unique visitors
+  const dailyUniqueVisitors = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    filtered.forEach((e) => {
+      if (!e.anonymous_install_id) return;
+      const day = format(toZonedTime(parseISO(e.created_at), TZ), "yyyy-MM-dd");
+      if (!map.has(day)) map.set(day, new Set());
+      map.get(day)!.add(e.anonymous_install_id);
+    });
+    return Array.from(map.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([date, ids]) => ({ date, uniqueVisitors: ids.size }));
+  }, [filtered]);
 
   // Top restaurants
   const topRestaurants = useMemo(() => {
@@ -208,6 +243,10 @@ const Dashboard = ({ password }: DashboardProps) => {
           setEventFilter={setEventFilter}
           daysBack={daysBack}
           setDaysBack={setDaysBack}
+          customStartDate={customStartDate}
+          setCustomStartDate={setCustomStartDate}
+          customEndDate={customEndDate}
+          setCustomEndDate={setCustomEndDate}
         />
 
         <SummaryCards
@@ -227,6 +266,8 @@ const Dashboard = ({ password }: DashboardProps) => {
           <EventChart data={dailyData} />
           <HourlyChart data={hourlyData} />
         </div>
+
+        <DailyUniqueVisitors data={dailyUniqueVisitors} />
 
         <div className="grid gap-6 lg:grid-cols-2">
           <IntentMap events={filtered} restaurants={restMap} />
