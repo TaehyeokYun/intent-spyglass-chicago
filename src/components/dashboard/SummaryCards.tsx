@@ -1,17 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Activity, Users, MapPin, TrendingUp } from "lucide-react";
+import { Activity, Users, UserCheck, MapPin, TrendingUp } from "lucide-react";
 
 interface Props {
   totalEvents: number;
   uniqueUsers: number;
+  returningVisitors: number;
   topNeighborhood: string;
   avgEventsPerDay: number;
 }
 
-const SummaryCards = ({ totalEvents, uniqueUsers, topNeighborhood, avgEventsPerDay }: Props) => {
+const SummaryCards = ({ totalEvents, uniqueUsers, returningVisitors, topNeighborhood, avgEventsPerDay }: Props) => {
   const cards = [
     { label: "Total Events", value: totalEvents.toLocaleString(), icon: Activity, color: "text-primary" },
     { label: "Unique Visitors", value: uniqueUsers.toLocaleString(), icon: Users, color: "text-[hsl(var(--chart-3))]" },
+    { label: "Returning Visitors", value: returningVisitors.toLocaleString(), icon: UserCheck, color: "text-[hsl(var(--chart-2))]" },
     { label: "Top Neighborhood", value: topNeighborhood, icon: MapPin, color: "text-accent" },
     { label: "Avg / Day", value: avgEventsPerDay.toLocaleString(), icon: TrendingUp, color: "text-[hsl(var(--chart-4))]" },
   ];

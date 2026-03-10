@@ -261,6 +261,7 @@ const Dashboard = ({ password }: DashboardProps) => {
         <SummaryCards
           totalEvents={filtered.length}
           uniqueUsers={uniqueUsers}
+          returningVisitors={returningVisitors}
           topNeighborhood={
             topRestaurants.length > 0 ? topRestaurants[0].neighborhood : "—"
           }
